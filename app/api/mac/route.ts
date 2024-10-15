@@ -1,7 +1,5 @@
 // /app/api/mac/route.js
 
-import { NextResponse } from "next/server";
-
 const allowedMacAddrs = ["08:97:98:b2:7e:83"];
 
 export async function POST(request: Request) {
