@@ -26,9 +26,17 @@ export async function GET(request: Request) {
         }
       );
     }
-    return new Response(JSON.stringify({ date: new Date().toTimeString() }), {
-      status: 200,
-    });
+    const randomText = Math.random().toString(36).substring(2, 15);
+    return new Response(
+      JSON.stringify({
+        [`random${Math.random()
+          .toString(36)
+          .substring(2, 7)}`]: `${randomText}`,
+      }),
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     return new Response(JSON.stringify({ error: "Invalid request" }), {
       status: 400,
