@@ -19,24 +19,26 @@ export async function GET(request: Request) {
     );
 
     if (allowedMacAddrs.includes(macAddress)) {
-      return new Response(
-        JSON.stringify({ date: new Date().toTimeString(), mujhe: "ishq" }),
-        {
-          status: 200,
-        }
-      );
-    }
-    const randomText = Math.random().toString(36).substring(2, 15);
-    return new Response(
-      JSON.stringify({
-        [`random${Math.random()
-          .toString(36)
-          .substring(2, 7)}`]: `${randomText}`,
-      }),
-      {
+      return new Response("#ffc0cb", {
         status: 200,
-      }
-    );
+      });
+    }
+    const generateRandomColor = () => {
+      const letters = "0123456789ABCDEF";
+      let color;
+      do {
+        color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+      } while (color === "#ffc0cb");
+      return color;
+    };
+
+    const randomColor = generateRandomColor();
+    return new Response(randomColor, {
+      status: 200,
+    });
   } catch (error) {
     return new Response(JSON.stringify({ error: "Invalid request" }), {
       status: 400,
